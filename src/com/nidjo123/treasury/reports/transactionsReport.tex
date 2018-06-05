@@ -1,0 +1,58 @@
+\documentclass[a4paper, 11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[croatian]{babel}
+\usepackage[margin=3cm,headheight=14.067pt]{geometry}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{hhline}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\usepackage[sc]{mathpazo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textsc{Župa Gospe Fatimske, Lužani}}
+\rhead{\textit{Generirano: \today}}
+\rfoot{Stranica \thepage/\pageref{LastPage}}
+
+\begin{document}
+
+\setlength{\extrarowsep}{2pt}
+
+\begin{longtabu} to \textwidth {| X[0.65,c] | X[2,l] | X[0.8,r] | X[0.8,r] |}
+
+\multicolumn{4}{c}{\textbf{\large Ispis blagajničkog dnevnika}} \\
+\hline
+\multicolumn{2}{|c|}{{$startDate}--{$endDate}} & \multicolumn{2}{c|}{Broj zapisa: {$numberOfTransactions}} \\
+\hhline{====}
+\textbf{Datum} & \textbf{Opis} & \textbf{Primitak} & \textbf{Izdatak} \\
+\hhline{====}
+\endfirsthead
+
+\hline
+\textbf{Datum} & \textbf{Opis} & \textbf{Primitak} & \textbf{Izdatak} \\
+\hhline{====}
+\endhead
+
+\hhline{====}
+\multicolumn{4}{|c|}{\textsl{Nastavak na sljedećoj stranici}}\\
+\hline
+\endfoot
+
+\hhline{====}
+\multicolumn{2}{|r||}{Promet:} & {$totalIncome}  & {$totalExpense} \\
+\hline
+\multicolumn{2}{|r||}{\textbf{Stanje:}} & \multicolumn{2}{r|}{$total} \\
+\hline
+\multicolumn{4}{l}{\small\textbf{Napomena: } Svi prikazani podaci odnose se na navedeno razdoblje.} \\
+\endlastfoot
+
+#foreach ($transaction in $transactions)
+{$transaction.date} & {$transaction.description} & {$transaction.income} & {$transaction.expense} \\
+#end
+
+\end{longtabu}
+
+\end{document}

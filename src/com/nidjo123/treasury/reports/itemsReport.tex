@@ -1,0 +1,59 @@
+\documentclass[a4paper, 11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[croatian]{babel}
+\usepackage[margin=3cm,headheight=14.067pt]{geometry}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{hhline}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\usepackage[sc]{mathpazo}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textsc{Župa Gospe Fatimske, Lužani}}
+\rhead{\textit{Generirano: \today}}
+\rfoot{Stranica \thepage/\pageref{LastPage}}
+
+\begin{document}
+
+\setlength{\extrarowsep}{1pt}
+
+\begin{longtabu} to \textwidth {| X[2,c] | X[0.8,r] | X[0.8,r] |}
+
+\multicolumn{3}{c}{\textbf{\large Ispis po stavkama}} \\
+\hline
+\multicolumn{2}{|c|}{{$startDate}--{$endDate}} & \multicolumn{1}{c|}{Broj stavki: {$numberOfItems}} \\
+\hline
+\textbf{Naziv stavke} & \textbf{Primitak} & \textbf{Izdatak} \\
+\hhline{===}
+\endfirsthead
+
+\hline
+\textbf{Naziv stavke} & \textbf{Primitak} & \textbf{Izdatak} \\
+\hhline{===}
+\endhead
+
+\multicolumn{3}{|c|}{\textsl{Nastavak na sljedećoj stranici}}\\
+\hline
+\endfoot
+
+\multicolumn{1}{|r||}{Ukupni promet:} & {$totalIncome} & {$totalExpense} \\
+\hline
+\multicolumn{1}{|r||}{\textbf{Stanje:}} & \multicolumn{2}{r|}{$total} \\
+\hline
+\multicolumn{3}{l}{\small\textbf{Napomena: } Svi prikazani podaci odnose se na navedeno razdoblje.} \\
+\endlastfoot
+
+#foreach ($item in $items)
+\multicolumn{1}{|l|}{$item.name} & {$item.income} & {$item.expense} \\*
+\hline
+\multicolumn{1}{|r||}{\textbf{Stanje:}} & \multicolumn{2}{r|}{$item.total} \\
+\hhline{===}
+#end
+
+\end{longtabu}
+
+\end{document}
